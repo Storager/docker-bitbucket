@@ -16,7 +16,7 @@ RUN ([ -d $BITBUCKET_FOLDER ] || mkdir -p $BITBUCKET_FOLDER) \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd bitbucket -m -s /bin/bash \
-    chown -R bitbucket:bitbucket $BITBUCKET_FOLDER
+    && chown -R bitbucket:bitbucket $BITBUCKET_FOLDER
     
 USER bitbucket
 
