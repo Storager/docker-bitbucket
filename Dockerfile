@@ -1,14 +1,14 @@
 FROM openjdk:8-jdk
 
-ENV BAMBOO_VERSION=6.2.2 BAMBOO_FOLDER=/opt/bamboo BAMBOO_HOME=/opt/bamboo/data
+ENV BITBUCKET_VERSION=6.2.2 BITBUCKET_FOLDER=/opt/BITBUCKET BITBUCKET_HOME=/opt/bitbucket/data
 
 EXPOSE 8085
 
-RUN ([ -d $BAMBOO_FOLDER ] || mkdir -p $BAMBOO_FOLDER) \
-    && [ -d $BAMBOO_FOLDER/app ] \
-    || cd  $BAMBOO_FOLDER \
-    && wget "https://www.atlassian.com/software/bamboo/downloads/binary/atlassian-bamboo-${BAMBOO_VERSION}.tar.gz" \
-    && tar -xvf atlassian-bamboo-${BAMBOO_VERSION}.tar.gz && mv atlassian-bamboo-${BAMBOO_VERSION} app \
-    && rm atlassian-bamboo-${BAMBOO_VERSION}.tar.gz
+RUN ([ -d $BITBUCKET_FOLDER ] || mkdir -p $BITBUCKET_FOLDER) \
+    && [ -d $BITBUCKET_FOLDER/app ] \
+    || cd  $BITBUCKET_FOLDER \
+    && wget "https://www.atlassian.com/software/bitbucket/downloads/binary/atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz" \
+    && tar -xvf atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz && mv atlassian-bitbucket-${BITBUCKET_VERSION} app \
+    && rm atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz
 
-ENTRYPOINT $BAMBOO_FOLDER/app/bin/start-bamboo.sh -fg
+ENTRYPOINT $BITBUCKET_FOLDER/app/bin/start-bitbucket.sh -fg
