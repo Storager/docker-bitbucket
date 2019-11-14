@@ -1,6 +1,6 @@
 FROM openjdk:8-jre
 
-ENV BITBUCKET_VERSION=5.10.0 BITBUCKET_FOLDER=/opt/BITBUCKET BITBUCKET_HOME=/opt/bitbucket/data
+ENV BITBUCKET_VERSION=5.10.0 BITBUCKET_FOLDER=/opt/bitbucket BITBUCKET_HOME=/opt/bitbucket/data
 
 EXPOSE 8085
 
@@ -14,5 +14,10 @@ RUN ([ -d $BITBUCKET_FOLDER ] || mkdir -p $BITBUCKET_FOLDER) \
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+RUN useradd bitbucket -m -s /bin/bash \
+    chown -R bitbucket:bitbucket $BITBUCKET_FOLDER
+    
+USER bitbucket
 
 ENTRYPOINT $BITBUCKET_FOLDER/app/bin/start-bitbucket.sh -fg
