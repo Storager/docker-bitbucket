@@ -7,7 +7,7 @@ EXPOSE 8085
 RUN ([ -d $BITBUCKET_FOLDER ] || mkdir -p $BITBUCKET_FOLDER) \
     && [ -d $BITBUCKET_FOLDER/app ] \
     || cd  $BITBUCKET_FOLDER \
-    && wget "https://www.atlassian.com/software/bitbucket/downloads/binary/atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz" \
+    && wget "https://product-downloads.atlassian.com/software/stash/downloads/atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz" \
     && tar -xvf atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz && mv atlassian-bitbucket-${BITBUCKET_VERSION} app \
     && rm atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz
 
