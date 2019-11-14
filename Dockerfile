@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM openjdk:8-jre
 
 ENV BITBUCKET_VERSION=5.10.0 BITBUCKET_FOLDER=/opt/BITBUCKET BITBUCKET_HOME=/opt/bitbucket/data
 
@@ -9,6 +9,10 @@ RUN ([ -d $BITBUCKET_FOLDER ] || mkdir -p $BITBUCKET_FOLDER) \
     || cd  $BITBUCKET_FOLDER \
     && wget "https://product-downloads.atlassian.com/software/stash/downloads/atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz" \
     && tar -xvf atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz && mv atlassian-bitbucket-${BITBUCKET_VERSION} app \
-    && rm atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz
+    && rm atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz \
+    && apt-get update && apt-get install -y git \
+    && apt-get autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT $BITBUCKET_FOLDER/app/bin/start-bitbucket.sh -fg
